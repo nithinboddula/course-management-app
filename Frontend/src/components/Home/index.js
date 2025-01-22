@@ -35,7 +35,7 @@ const Home = () => {
   const [createBtn, setCreateBtn] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
-  let url = "https://course-management-app-t4qe.vercel.app/";
+  let url = "https://course-management-app-seven.vercel.app";
 
   const handleShowModal = (course) => {
     // console.log(course);
@@ -62,7 +62,7 @@ const Home = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const url = "https://course-management-app-t4qe.vercel.app/";
+      const url = "https://course-management-app-seven.vercel.app";
       const token = localStorage.getItem("token");
       const response = await fetch(`${url}/api/routes/courses`, {
         headers: {
