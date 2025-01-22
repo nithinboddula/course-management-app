@@ -11,7 +11,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  let url = "https://course-management-app-t4qe.vercel.app/";
+  let url = "https://course-management-app-seven.vercel.app";
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
