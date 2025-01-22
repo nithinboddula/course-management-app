@@ -14,7 +14,7 @@ const SignUp = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
-  let url = "http://localhost:5000";
+  let url = "https://course-management-app-t4qe.vercel.app/";
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
