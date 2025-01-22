@@ -14,6 +14,8 @@ const SignUp = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
+  let url = "http://localhost:5000";
+
   const handleUsername = (event) => {
     setUsername(event.target.value);
     setUsernameError(""); // Clear error on input change
@@ -82,10 +84,11 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register/",
-        { username, email, password }
-      );
+      const response = await axios.post(`${url}/api/auth/register/`, {
+        username,
+        email,
+        password,
+      });
 
       if (response.status === 201) {
         setUsername("");

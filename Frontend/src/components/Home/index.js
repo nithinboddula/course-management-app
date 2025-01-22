@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
@@ -35,6 +35,8 @@ const Home = () => {
   const [createBtn, setCreateBtn] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
+  let url = "http://localhost:5000";
+
   const handleShowModal = (course) => {
     // console.log(course);
     setCourseToEdit(course);
@@ -58,31 +60,31 @@ const Home = () => {
     setCourseToEdit(null);
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
+      const url = "http://localhost:5000";
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/auth/courses", {
+      const response = await fetch(`${url}/api/routes/courses`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const jsonData = await response.json();
-      console.log(jsonData);
       setData(jsonData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const onUpdate = async (updatedCourse) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:5000/api/auth/course/${updatedCourse.courseId}`,
+        `${url}/api/routes/course/${updatedCourse.courseId}`,
         updatedCourse,
         {
           headers: {
@@ -111,7 +113,7 @@ const Home = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.delete(
-        `http://localhost:5000/api/auth/course/${courseId}`,
+        `${url}/api/routes/course/${courseId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -142,7 +144,7 @@ const Home = () => {
       const token = localStorage.getItem("token");
       console.log(token);
       const response = await axios.post(
-        `http://localhost:5000/api/auth/createCourse`,
+        `${url}/api/routes/createCourse`,
         newCourse,
         {
           headers: {
